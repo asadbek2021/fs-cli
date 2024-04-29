@@ -1,25 +1,29 @@
 const OS = require("os");
 
 export class OperatingSystem {
-    constructor() {}
+    #os;
+
+    constructor(os) {
+      this.#os = os  
+    }
 
     homeDirectory() {
-        return OS.homedir();
+        return this.#os.homedir();
     }
     
     processingCores() {
-        return OS.cpus();
+        return this.#os.cpus();
     }
 
     username() {
-        return OS.userInfo({encoding: "utf-8"})
+        return this.#os.userInfo({encoding: "utf-8"})
     }
 
     architecture() {
-        return OS.arch();
+        return this.#os.arch();
     }
 
     endOfLineCharacter() {
-        return OS.EOL;
+        return this.#os.EOL;
     }
 }
