@@ -1,21 +1,17 @@
-class Commander {
-    #process;
+export class Commander {
+    #messenger;
     #fileSystem;
-    #operatingSystem
+    #operatingSystem;
+    #user;
 
-    constructor(ps, fs, os) {
-        this.#process = ps
+    constructor(messenger, fs, os) {
+        this.#messenger = messenger;
         this.#fileSystem = fs;
         this.#operatingSystem = os;
-
-        this.#onStartHook()
     }
 
-    #onStartHook() {
-        this.#process.on("SIGINT", (s)=> {
-            // process.stdout.write("\033c");
-            process.stdout.write("Thank you for using File Manager, Username, goodbye!\n")
-            process.exit(0)
-        })
+    parseCommand() {
+        
     }
+
 }
