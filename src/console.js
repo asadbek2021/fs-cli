@@ -1,29 +1,25 @@
-export class Console {
-    // #red = '\\x1b[31m';
-    // #green = '\\x1b[32m';
-    // #reset = '\\x1b[0m';
-
+export class Messenger {
     #process;
-    #username;
+    #user;
 
-    constructor(ps, username) {
+    constructor(ps, user) {
         this.#process = ps;
-        this.#username = username;
+        this.#user = user;
     }
 
     greetWithUsername() {
-        this.#process.stdout(`Welcome to the File Manager, ${this.#username}!\n`)
+        this.#process.print(this.#user.greet())
     }
 
     invalidInput() {
-        this.#process.stdout("Invalid input\n");
+        this.#process.print("Invalid input\n");
     }
 
     finish() {
-        this.#process.stdout(`Thank you for using File Manager, ${this.#username}, goodbye!\n`)
+        this.#process.print(this.#user.bye())
     }
 
-    clear() {
-        this.#process.stdout.write("\033c");
+    afterEachMessage() {
+        this.#process.printCurrentDirectory()
     }
 }
