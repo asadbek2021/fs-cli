@@ -1,10 +1,15 @@
 export class Archive {
     #algorithm
+
     constructor(algorithm) {
         this.#algorithm = algorithm
     }
 
-    compress() {}
+    compress() {
 
-    decompress() {}
+    }
+
+    decompress() {
+
+    }
 }
