@@ -1,39 +1,32 @@
-import { Messenger } from "./console.js";
+import { Messenger } from "./messenger.js";
 import { FileSystem } from "./fs.js";
 import { OperatingSystem } from "./os.js";
 import { Process } from "./process.js";
 import { Commander } from "./commander.js";
 import { User } from "./user.js";
 
-const newProcess = new Process()
-
-const username = newProcess.argumentValue("username");
-
-if(!username) {
-    throw new Error('Invalid input. Username was not provided')
-}
-const user = new User(
-    username
-)
+const newProcess = new Process();
 const messenger = new Messenger(
-    newProcess,
-    user
-)
+    newProcess, 
+    new User(newProcess.argumentValue("username"))
+);
 
-newProcess.onExit(() => messenger.finish());
-newProcess.listen((data) => {
-    messenger.greetWithUsername()
-    console.log(data)
-    messenger.afterEachMessage()
-});
-
-new Commander(
-    new Messenger(
-        newProcess,
-        user
+const commander = new Commander(
+    messenger,
+    new FileSystem(
+        newProcess
     ),
-    new FileSystem(),
     new OperatingSystem(),
-)
+    newProcess
+);
+
+newProcess
+    .onExit(() => messenger.finish())
+    .listen((data) => {
+        commander.parseCommand(data.toString());
+        messenger.afterEachMessage();
+    });
+
+
 
 messenger.greetWithUsername()
