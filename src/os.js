@@ -1,11 +1,9 @@
 import OS from "os";
 
 export class OperatingSystem {
-    #os;
+    #os = OS;
 
-    constructor(os) {
-      this.#os = os  
-    }
+    constructor() {}
 
     homeDirectory() {
         return this.#os.homedir();
@@ -16,7 +14,7 @@ export class OperatingSystem {
     }
 
     username() {
-        return this.#os.userInfo({encoding: "utf-8"})
+        return this.#os.userInfo({ encoding: "utf-8" })
     }
 
     architecture() {
