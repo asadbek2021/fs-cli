@@ -9,30 +9,33 @@ export class Process {
         const argmts = this.#parseArguments()
         const keyValue = argmts.find(argmt => !!argmt.match(fullkey));
 
-        if(!keyValue ) {
+        if(!keyValue) {
             return;
         }
 
-        const value = keyValue.replace(fullkey, "");
-
-        return value;
+        return keyValue.replace(fullkey, "");
     }
 
     print(input) {
+        if(typeof input != "string") {
+            this.#process.stdout.write(JSON.stringify(input));
+            
+            return this;
+        }
+
         this.#process.stdout.write(input);
+
+        return this;
+    }
+
+    currentDirectory() {
+        return this.#process.cwd();
     }
 
     printCurrentDirectory() {
-        this.print(`You are currently in ${this.#process.cwd()}`);
-    }
+        this.print(`You are currently in ${this.currentDirectory()} \n---------------------------- \n`);
 
-    #parseArguments() {
-        return this.#process.argv.reduce((args, current, index) => {
-            if(index > 1) {
-                args.push(current)
-            }
-            return args
-        }, []);
+        return this;
     }
 
     listen(callback) {        
@@ -46,5 +49,20 @@ export class Process {
             callback()
             this.#process.exit(0)
         })
+
+         return this;
+    }
+
+    changeWorkingDirectory(path) {
+        this.#process.chdir(path)
+    }
+
+    #parseArguments() {
+        return this.#process.argv.reduce((args, current, index) => {
+            if(index > 1) {
+                args.push(current)
+            }
+            return args
+        }, []);
     }
 }
