@@ -35,6 +35,17 @@ export class FileSystem {
             type: elem.isFile() ? "file" : "directory"
         }))
 
+        list.sort((a,b) => {
+            if (a.type == "file" && b.type == "directory") {
+                return 1
+            }
+            else if (b.type == "file" && a.type == "directory") {
+                return -1 
+            }
+
+            return 0;
+        })
+    
         console.table(list);
     }
 
