@@ -10,11 +10,16 @@ export class OperatingSystem {
     }
     
     processingCores() {
-        return this.#os.cpus();
+        const cores = this.#os.cpus();
+
+        return cores.map((core) => ({
+            model: core.model,
+            speed: core.speed
+        }));
     }
 
     username() {
-        return this.#os.userInfo({ encoding: "utf-8" })
+        return this.#os.userInfo({ encoding: "utf-8" }).username;
     }
 
     architecture() {
