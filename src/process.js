@@ -18,12 +18,12 @@ export class Process {
 
     print(input) {
         if(typeof input != "string") {
-            this.#process.stdout.write(JSON.stringify(input));
+            this.#process.stdout.write(JSON.stringify(input) + "\n");
             
             return this;
         }
 
-        this.#process.stdout.write(input);
+        this.#process.stdout.write(input + "\n");
 
         return this;
     }
