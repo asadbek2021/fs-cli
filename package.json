@@ -1,0 +1,27 @@
+{
+  "name": "cli-file-manager",
+  "version": "0.0.1",
+  "description": "## Description",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/asadbek2021/fs-cli.git"
+  },
+  "keywords": [
+    "cli"
+  ],
+  "author": "asadbekraimov642@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/asadbek2021/fs-cli/issues"
+  },
+  "homepage": "https://github.com/asadbek2021/fs-cli#readme",
+  "engines": {
+    "node": "^20.5.0",
+    "npm": "9.8.0"
+  }
+}
